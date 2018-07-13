@@ -1,28 +1,38 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import './style.css'
-
-function VimeoVideo(props) {
-	const { src } = props;
-
-	if (!src) return null;
-
-	const frame = `<iframe
-            src="https://player.vimeo.com/video/${src.replace('https://vimeo.com/', '')}"
-            frameborder="0"
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen
-        />`
-	return (
-		<div className="vimeo_video form-group embed-container">
-			<div dangerouslySetInnerHTML={{ __html: frame }} />
-		</div>)
+export function insertIntoStr(str, pos, toIn) {
+	return str.substr(0, pos) + toIn + str.substr(pos, str.length)
 }
 
+export function replaceInStr(str, begin, start, subj) {
+	return str.slice(0, begin)
+		+ subj
+		+ str.slice(start, str.length)
+}
 
-VimeoVideo.propTypes = {
-	src: PropTypes.string.isRequired
-};
+export function stripTags(str) {
+	return str.replace(/<[^>]*>/gi, '');
+}
 
-export default VimeoVideo
+export function parseAllATags(str) {
+	const res = str.match(/<a href=[^>]+>(.+?)<\/a>/g);
+	return res ? res : []
+}
+
+export function stripATags(str) {
+	return str.replace(/<a[^>]*>/gi, '').replace(/<[^>]*a>/gi, '');
+}
+
+export function buildUrlSearch(params) {
+	if(!params) return '';
+
+	const res =
+		Object
+			.keys(params)
+			.reduce((acc, key) => params[key] || params[key] === 0 ?
+				acc + (!acc ? '' : '&') + `${key}=${params[key]}`
+			: acc, '');
+	return res ? `?${res}` : ''
+}
+
+export function buildUrlSearchForArray(arr, arrName) {
+	return arr.reduce((acc, elem) => acc + (acc ? '&' : '') + `${arrName}[]=${elem}`, '')
+}

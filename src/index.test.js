@@ -1,33 +1,25 @@
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import React from 'react';
-import VimeoVideo from './index';
+import {
+	insertIntoStr,
+	replaceInStr,
+	stripTags,
+	stripATags,
+	buildUrlSearchForArray,
+	buildUrlSearch,
+	parseAllATags,
+} from './index'
 
-configure({ adapter: new Adapter() });
+let str = '';
 
-function setup(customProps, lifeCycle = false) {
-	const props = {
-		...customProps
-	}
-	const container = shallow(<VimeoVideo {...props} />, { disableLifecycleMethods: lifeCycle })
-	return { container, props }
-}
+describe('string helper methods', () => {
 
-describe('VimeoVideo component', () => {
-
-	it('should render the component', () => {
-		const { container } = setup({ src: 'https://vimeo.com/30281976' })
-		expect(container.exists()).toBe(true);
+	beforeAll(() => {
+		str = 'test string';
 	});
 
-	it('should not render the component', () => {
-		const { container } = setup()
-		expect(container.exists()).toBe(false);
+	it('should insert into string', () => {
+		expect(insertIntoStr(str, 5, 'word ')).toEqual('test word string')
 	});
 
-	it('should has dangerouslySetInnerHTML property', () => {
-		const { container } = setup({ src: 'https://vimeo.com/30281976' })
-		expect(container.find('.vimeo_video').children().props()).toHaveProperty('dangerouslySetInnerHTML');
-	});
+
 
 });

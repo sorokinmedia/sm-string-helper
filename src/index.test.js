@@ -24,4 +24,8 @@ describe('string helper methods', () => {
 		expect(replaceInStr(str, 5, 5, 'word ')).toEqual('test word string')
 	});
 
+	it('should replace in string', () => {
+		expect(stripTags('<div>' + str + '</div>')).toEqual(str)
+	});
+
 });

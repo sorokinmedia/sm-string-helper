@@ -67,5 +67,8 @@
 		"transform": {
 			".*": "./node_modules/jest-css-modules"
 		}
+	},
+	"dependencies": {
+		"jest-css-modules": "^1.1.0"
 	}
 }

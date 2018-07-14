@@ -20,6 +20,8 @@ describe('string helper methods', () => {
 		expect(insertIntoStr(str, 5, 'word ')).toEqual('test word string')
 	});
 
-
+	it('should replace in string', () => {
+		expect(replaceInStr(str, 5, 5, 'word ')).toEqual('test word string')
+	});
 
 });

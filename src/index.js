@@ -27,7 +27,7 @@ export function buildUrlSearch(params) {
 	const res =
 		Object
 			.keys(params)
-			.reduce((acc, key) => params[key] || params[key] === 0 || params[key] === false ?
+			.reduce((acc, key) => params[key] || params[key] === 0 || params[key] === false || || params[key] === 'false' ?
 				acc + (!acc ? '' : '&') + `${key}=${params[key]}`
 			: acc, '');
 	return res ? `?${res}` : ''

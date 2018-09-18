@@ -27,7 +27,7 @@ function buildUrlSearch(params) {
 	if (!params) return '';
 
 	var res = Object.keys(params).reduce(function (acc, key) {
-		return params[key] || params[key] === 0 ? acc + (!acc ? '' : '&') + (key + '=' + params[key]) : acc;
+		return params[key] || params[key] === 0 || params[key] === false ? acc + (!acc ? '' : '&') + (key + '=' + params[key]) : acc;
 	}, '');
 	return res ? '?' + res : '';
 }
